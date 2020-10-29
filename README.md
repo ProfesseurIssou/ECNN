@@ -59,6 +59,12 @@ my_network.train(input_dataset,expected,iteration,display=True)
 # Make prediction values
 test_inputs = [1,1,1,0]
 print(my_network.predict(test_inputs)) 
+
+# Save the network
+my_network.save("networkData/")
+
+# Load other network
+my_network.load("networkData2/")
 ```
 
 
