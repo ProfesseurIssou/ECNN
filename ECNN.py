@@ -1,4 +1,5 @@
 import json
+from scipy.special import expit
 import numpy as np
 np.random.seed(1)
 
@@ -30,14 +31,18 @@ def function(ftype:str,z:float,prime=False,alpha=1):
     #         y = alpha
     if ftype == "Sigmoid":
         if prime == False:
-            y = 1/(1+np.exp(-z))
+            y = expit(z)
+            # y = 1/(1+np.exp(-z))
         else:
-            y = (1/(1+np.exp(-z))) * (1-(1/(1+np.exp(-z))))
+            y = (expit(z)) * (1-(expit(z)))
+            # y = (1/(1+np.exp(-z))) * (1-(1/(1+np.exp(-z))))
     if ftype == "Tanh":
         if prime == False:
-            y = (np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))
+            y = np.tanh(z)
+            # y = (np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))
         else:
-            y = 1 - (np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))**2
+            y = 1.0 - np.tanh(z)**2
+            # y = 1 - (np.exp(z)-np.exp(-z))/(np.exp(z)+np.exp(-z))**2
     if ftype == "ReLU":
         if prime == False:
             y = np.maximum(0,z)
